@@ -1,0 +1,12 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <a [routerLink]="['/home/cars']" class="nav-link">Graphic</a>
+        <a [routerLink]="['/home/users']" class="nav-link">User List</a>
+        <a (click)="logout()" class="nav-link">Logout</a>
+      </div>
+    </div>
+  </div>
+</nav>

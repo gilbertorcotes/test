@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Gender</th>
+      <th>EMail</th>
+      <th>Picture</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of data | paginate: { id: 'listing_pagination',
+    itemsPerPage: 5,
+    currentPage: p,
+    totalItems: record }">
+      <td>{{user.first_name}}</td>
+      <td>{{user.last_name}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.gender}}</td>
+      <td><img src="{{user.image}}" alt="{{user.first_name}}"></td>
+    </tr>
+  </tbody>
+</table>
+<div style="text-align: center;">
+  <pagination-controls id="listing_pagination" (pageChange)="p = $event"></pagination-controls>
+</div>
