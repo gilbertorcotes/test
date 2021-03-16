@@ -1,5 +1,7 @@
 "use strict"
 
+const results = [];
+
 /**
  * @class Calcula el número de segundos que tardan los robots en realizar al secuencia de pasos
  */
@@ -98,11 +100,12 @@ function robotMove(req, res){
         }
 
     }
-    localStorage.setItem('caso',0);
     caso = caso + 1;
+    
+    results.push("Caso: #" + caso + " Segundos :" + segundos);
 
      console.log("Caso: #" + caso + " Segundos :" + segundos);
-     res.status(200).send({message: 'Concluido'});
+     res.status(200).send({message: "Caso: #" + caso + " Segundos :" + segundos, results});
 }
 
 

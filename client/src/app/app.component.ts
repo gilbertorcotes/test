@@ -1,5 +1,6 @@
+import { UserLoggedinService } from './services/user-loggedin.service';
 import { AuthService } from './services/auth.service';
-import { Component } from '@angular/core';
+import { Component, ComponentFactoryResolver } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +11,15 @@ export class AppComponent {
   title = 'client';
   showmenu = false;
 
-  constructor(private auth: AuthService){
-    const token = this.auth.getToken();
-    const ident = this.auth.getIdentity();
-    this.showmenu = !!token && !!ident;
+  constructor(private auth: AuthService, private service: UserLoggedinService){
+    this.showmenu = !!this.service.getUserLoggedIn();
+    console.log(this.showmenu);
+    this.service.userLoggedInSub().subscribe(res =>
+    {
+      this.showmenu = !!res;
+    },
+      err => {
+
+    });
   }
 }

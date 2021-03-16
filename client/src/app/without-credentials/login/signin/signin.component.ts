@@ -1,3 +1,4 @@
+import { UserLoggedinService } from './../../../services/user-loggedin.service';
 import { Routes } from '@angular/router';
 import { AuthService } from './../../../services/auth.service';
 import { LoginService } from './../login.service';
@@ -17,8 +18,15 @@ export class SigninComponent implements OnInit {
   public alertRegister;
 
 
-  constructor(private login: LoginService, private authservice: AuthService, private route: Router) {
+  constructor(private login: LoginService, private authservice: AuthService, private route: Router, private service: UserLoggedinService) {
+    this.service.userLoggedInSub().subscribe(res => {
+      if (!!res){
+        this.route.navigate(['/home/users']);
+      }
+    },
+    err => {
 
+    });
   }
 
   ngOnInit(): void {
@@ -45,7 +53,7 @@ export class SigninComponent implements OnInit {
             //Crear elemento en el local storage para tener el token en sesion
 
             localStorage.setItem('token', token.token);
-            this.route.navigate(['/home/users']);
+            this.service.userLoggedIn(token.token, identity);
             this.user = new User('','','','');
 
             console.log(token);

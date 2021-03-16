@@ -20,6 +20,10 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  return(){
+    this.route.navigate(['/session/login']);
+  }
+
   onSubmitRegister(){
     console.log("reigstro .... " +this.user.email);
     this.signup.register(this.user).subscribe(

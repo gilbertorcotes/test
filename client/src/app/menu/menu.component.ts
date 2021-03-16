@@ -1,3 +1,4 @@
+import { UserLoggedinService } from './../services/user-loggedin.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -8,16 +9,25 @@ import { Router } from '@angular/router';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(private router: Router){
+  constructor(private router: Router, private service: UserLoggedinService){
 
   }
 
   ngOnInit(): void {
+    this.service.userLoggedInSub().subscribe(res => {
+      if (!res){
+        this.router.navigate(['/session/login']);
+      }
+    },
+    err => {
+
+    });
   }
+
 
   logout(){
     localStorage.clear();
-    this.router.navigate(['/session/login']);
+    this.service.userLogout();
   }
 
 }
