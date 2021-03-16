@@ -11,6 +11,7 @@ Evaluación técnica UMVEL
 * Instalación
 * Configuración
 * Consideraciones
+* Fe de erratas
 
 
 ## INTRODUCTION
@@ -87,3 +88,7 @@ Se emplean los siguientes componentes y versiones:
 ## CONSIDERATIONS	
 
 La lógica empleada para el desarrollo del problema de los robots obedece a la información proporcionada.
+
+## FE DE ERRATAS	
+
+El modulo signin debajo de without-credentials debería llamarse signup.
