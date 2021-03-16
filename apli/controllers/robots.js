@@ -1,6 +1,6 @@
 "use strict"
 
-const results = [];
+var results = [];
 
 /**
  * @class Calcula el número de segundos que tardan los robots en realizar al secuencia de pasos
@@ -100,12 +100,22 @@ function robotMove(req, res){
         }
 
     }
-    caso = caso + 1;
     
-    results.push("Caso: #" + caso + " Segundos :" + segundos);
-
-     console.log("Caso: #" + caso + " Segundos :" + segundos);
-     res.status(200).send({message: "Caso: #" + caso + " Segundos :" + segundos, results});
+    
+    var longitud = results.length;
+    var cadena1 = "";
+    var cadena2 = "";
+    var incremento = 0;
+    if (longitud > 0){
+        cadena1 = results[longitud-1];
+        cadena2 = cadena1.substring(7,9);
+        incremento = parseInt(cadena2);
+    }
+    caso       = incremento + 1;
+    
+    results.push("Caso: #" + caso + " Segundos : " + segundos);
+    console.log("Caso: #" + caso + " Segundos : " + segundos);
+    res.status(200).send({message: results});
 }
 
 
