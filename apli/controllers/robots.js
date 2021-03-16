@@ -1,6 +1,14 @@
 "use strict"
 
+/**
+ * @class Calcula el número de segundos que tardan los robots en realizar al secuencia de pasos
+ */
+
 function robotMove(req, res){
+
+   /** 
+   * @description Determina el tiempo mínimo
+   */    
 	var params = req.params.est;
 	var secuencia = params;
 
@@ -22,13 +30,9 @@ function robotMove(req, res){
     var par = "";
 
     if (!Number.isInteger(parseInt(secuencia.substring(0,1)))){
-        console.log("El primer caracter debe ser un número");
-        res.status(200).send({message: 'deberia ser un número entero'});
+        res.status(200).send({message: 'El primer caracter debe ser un número entero'});
     }
     longitud = secuencia.length;
-/*    if (Number.isInteger(longitud / 2)){
-        res.status(400).send({message: 'Esta mal formada la estrategia, después del número de botones solo debe haber pares de datos'});
-    }*/
 
     botones = secuencia.substring(0, 1);
     botonRosa = 0;
@@ -58,14 +62,12 @@ function robotMove(req, res){
     }
 
     for (let i = 0; i < pares.length; i++) {
-        console.log(pares[i]);
+        //console.log(pares[i]);
         if(pares[i].toString().substring(0,1).toLowerCase() == "r") {
             individual = pares[i].toString();
             botonRosa = parseInt(individual.substring(1));
             botonActualRosa = botonRosa - botonActualRosa;
-            console.log("boton actual rosa : " + botonRosa);
             botonRosa = botonActualRosa;
-            console.log("boton rosa " + botonRosa);
             if (inicio) {
                 if (botonRosa >=0){
                     botonRosaPendiente = true;
@@ -76,9 +78,7 @@ function robotMove(req, res){
             else {
                 segundos = segundos + botonRosa;
             }
-            console.log("segundos : " + segundos);
             botonesPresionados = botonesPresionados + 1;
-            console.log("Botones presionados : " + botonesPresionados);
         } 
 
         
@@ -86,9 +86,7 @@ function robotMove(req, res){
             individual = pares[i].toString();
             botonVerde = parseInt(individual.substring(1));
             botonActualVerde = botonVerde - botonActualVerde;
-            console.log("boton actual verde : " + botonActualVerde);
             botonVerde = botonActualVerde;
-            console.log("boton verde " + botonVerde);
 
             if(botonRosaPendiente){
                 botonRosaPendiente = false;
@@ -96,16 +94,14 @@ function robotMove(req, res){
                                          // no se esta avanzando asi que no debería incrementar el tiempo
             }
             segundos = segundos + botonVerde;
-            console.log("verde");
-            console.log("segundos : " + segundos);
             botonesPresionados = botonesPresionados + 1;
-            console.log("Botones presionados : " + botonesPresionados);
         }
 
-
     }
+    localStorage.setItem('caso',0);
+    caso = caso + 1;
 
-     console.log(pares);
+     console.log("Caso: #" + caso + " Segundos :" + segundos);
      res.status(200).send({message: 'Concluido'});
 }
 

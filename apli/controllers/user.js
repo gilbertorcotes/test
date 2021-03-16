@@ -75,7 +75,7 @@ function loginUser(req, res) {
 							res.status(200).send({hola: user});
 						}
 					}else {
-						res.status(404).send({message: "La contraseña es incorrecta"});
+						res.status(500).send({message: "La contraseña es incorrecta"});
 					}
 				});
 			}
